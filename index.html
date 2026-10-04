@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Life — Modern Botanical Haven</title>
+  <link rel="stylesheet" href="greenlife.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Ambient Light Background -->
+  <div class="ambient-sphere sphere-1"></div>
+  <div class="ambient-sphere sphere-2"></div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4.2.8-4.9 2z"/></svg>
+      <span>Green<b>Life</b></span>
+    </div>
+    <button class="cart-trigger" id="cartToggleBtn" aria-label="Cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+  </nav>
+
+  <!-- Hero Header -->
+  <main class="app-container">
+    <header class="hero-header">
+      <span class="badge-pill">🍃 Botanical Excellence</span>
+      <h1>Bring Nature Into Your Space</h1>
+      <p>Curated premium plants crafted to enhance wellness, purify air, and elevate living environments.</p>
+    </header>
+
+    <!-- Category Filters -->
+    <section class="category-section">
+      <div class="category-bar">
+        <button class="cat-btn active" onclick="filterCategory('all', this)">All Plants</button>
+        <button class="cat-btn" onclick="filterCategory('flower', this)">Flowers</button>
+        <button class="cat-btn" onclick="filterCategory('fruit', this)">Fruits</button>
+        <button class="cat-btn" onclick="filterCategory('medicinal', this)">Medicinal</button>
+        <button class="cat-btn" onclick="filterCategory('indoor', this)">Indoor</button>
+        <button class="cat-btn" onclick="filterCategory('outdoor', this)">Outdoor</button>
+      </div>
+    </section>
+
+    <!-- Plant Showcase Grid -->
+    <section class="plant-grid" id="plantGrid"></section>
+  </main>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button class="close-cart" id="cartCloseBtn">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="empty-msg">Your cart is currently empty.</p>
+    </div>
+    <div class="cart-footer">
+      <div class="total-row">
+        <span>Total:</span>
+        <span id="cartTotal">৳0</span>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn" onclick="checkout()">Checkout Now</button>
+    </div>
+  </aside>
+
+  <script src="greenlife.js"></script>
+</body>
+</html>
