@@ -346,3 +346,100 @@ body {
   cursor: pointer;
   box-shadow: var(--shadow-drop);
 }
+
+/* --- Fixed Neumorphic Search Bar Styles --- */
+.navbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 8%;
+  background: rgba(224, 229, 236, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+}
+
+/* Container for search & cart buttons */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-trigger {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-color);
+  box-shadow: var(--shadow-drop);
+  color: var(--accent-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.search-trigger:active {
+  box-shadow: var(--shadow-inset);
+}
+
+.search-input-box {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 0;
+  height: 48px;
+  padding: 0;
+  border-radius: 24px;
+  background: var(--bg-color);
+  box-shadow: var(--shadow-inset);
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, padding 0.35s ease;
+  z-index: 20;
+}
+
+.search-input-box svg {
+  min-width: 18px;
+  color: var(--text-muted);
+}
+
+.search-input-box input {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  width: 100%;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  font-family: inherit;
+  box-shadow: none !important;
+}
+
+/* Active Expanded State: Covers "GreenLife" text while keeping logo visible */
+.search-wrapper.active .search-trigger {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.search-wrapper.active .search-input-box {
+  width: calc(100vw - 16% - 110px);
+  max-width: 500px;
+  opacity: 1;
+  pointer-events: auto;
+  padding: 0 18px;
+}

@@ -176,3 +176,79 @@ window.checkout = function() {
   saveCartAndSync();
   closeCart();
 };
+
+// --- Neumorphic Search Bar Logic & Filtering ---
+document.addEventListener("DOMContentLoaded", () => {
+  setupSearchLogic();
+});
+
+function setupSearchLogic() {
+  const searchWrapper = document.getElementById("searchWrapper");
+  const searchToggleBtn = document.getElementById("searchToggleBtn");
+  const searchInput = document.getElementById("searchInput");
+
+  if (!searchWrapper || !searchToggleBtn || !searchInput) return;
+
+  // Open Search Bar on Button Click
+  searchToggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    searchWrapper.classList.add("active");
+    searchInput.focus();
+  });
+
+  // Keep input click events inside the search box
+  searchWrapper.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+  // Close Search Bar on Outside Click
+  document.addEventListener("click", () => {
+    if (searchWrapper.classList.contains("active")) {
+      searchWrapper.classList.remove("active");
+      searchInput.value = "";
+      filterBySearch("");
+    }
+  });
+
+  // Dynamic Live Search Filter
+  searchInput.addEventListener("input", (e) => {
+    filterBySearch(e.target.value.toLowerCase().trim());
+  });
+}
+
+function filterBySearch(query) {
+  const grid = document.getElementById("plantGrid");
+  if (!grid) return;
+
+  const filteredItems = plantData.filter(item => {
+    const matchesCategory = (activeCategory === "all" || item.category === activeCategory);
+    const matchesSearch = item.name.toLowerCase().includes(query) || item.description.toLowerCase().includes(query);
+    return matchesCategory && matchesSearch;
+  });
+
+  grid.innerHTML = "";
+
+  if (filteredItems.length === 0) {
+    grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); font-weight: 600; padding: 40px 0;">No plants found matching your search.</p>`;
+    return;
+  }
+
+  filteredItems.forEach(plant => {
+    const card = document.createElement("div");
+    card.className = "plant-card";
+    card.innerHTML = `
+      <div class="card-img-wrapper">
+        <img src="${plant.image}" alt="${plant.name}" loading="lazy">
+      </div>
+      <div class="info">
+        <h3>${plant.name}</h3>
+        <p class="desc">${plant.description}</p>
+        <div class="card-footer">
+          <span class="price">৳${plant.price}</span>
+          <button class="add-btn" onclick="addToCart(${plant.id})" aria-label="Add to Cart">+</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
