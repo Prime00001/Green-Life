@@ -252,3 +252,80 @@ function filterBySearch(query) {
     grid.appendChild(card);
   });
 }
+// --- Product Details Modal Handling ---
+window.openProductDetailModal = function(plantId) {
+  const plant = plantData.find(p => p.id === plantId);
+  if (!plant) return;
+
+  const imgEl = document.getElementById("modalProductImg");
+  const catEl = document.getElementById("modalProductCategory");
+  const nameEl = document.getElementById("modalProductName");
+  const priceEl = document.getElementById("modalProductPrice");
+  const descEl = document.getElementById("modalProductDesc");
+  const addToCartBtn = document.getElementById("modalAddToCartBtn");
+  const modal = document.getElementById("productDetailModal");
+
+  if (imgEl) imgEl.src = plant.image;
+  if (catEl) catEl.innerText = plant.category.toUpperCase();
+  if (nameEl) nameEl.innerText = plant.name;
+  if (priceEl) priceEl.innerText = `৳${plant.price}`;
+  if (descEl) descEl.innerText = plant.description;
+
+  if (addToCartBtn) {
+    addToCartBtn.onclick = function() {
+      addToCart(plant.id);
+      closeProductDetailModal();
+    };
+  }
+
+  if (modal) modal.classList.add("active");
+};
+
+window.closeProductDetailModal = function() {
+  const modal = document.getElementById("productDetailModal");
+  if (modal) modal.classList.remove("active");
+};
+
+window.selectVariant = function(btn) {
+  const siblings = btn.parentElement.querySelectorAll(".variant-btn");
+  siblings.forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+};
+
+window.selectColor = function(dot) {
+  const siblings = dot.parentElement.querySelectorAll(".color-dot");
+  siblings.forEach(d => d.classList.remove("active"));
+  dot.classList.add("active");
+};
+
+// Event listener to open modal on clicking card image or title
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.getElementById("plantGrid");
+  if (!grid) return;
+
+  grid.addEventListener("click", (e) => {
+    // If click is on add-to-cart button, ignore opening modal
+    if (e.target.closest(".add-btn")) return;
+
+    const card = e.target.closest(".plant-card");
+    if (!card) return;
+
+    const addBtn = card.querySelector(".add-btn");
+    if (addBtn) {
+      const onclickAttr = addBtn.getAttribute("onclick");
+      const match = onclickAttr ? onclickAttr.match(/\d+/) : null;
+      if (match) {
+        openProductDetailModal(parseInt(match[0]));
+      }
+    }
+  });
+
+  const modalOverlay = document.getElementById("productDetailModal");
+  if (modalOverlay) {
+    modalOverlay.addEventListener("click", (e) => {
+      if (e.target === modalOverlay) {
+        closeProductDetailModal();
+      }
+    });
+  }
+});

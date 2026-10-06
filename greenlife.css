@@ -462,3 +462,159 @@ body {
 .modal-overlay.active {
   display: flex; /* সক্রিয় হলে পপ-আপ দেখাবে */
 }
+
+/* --- Modal Card Styling & Detail Views --- */
+.product-detail-card {
+  position: relative;
+  background: var(--bg-color);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  max-width: 720px;
+  width: 90%;
+  box-shadow: var(--shadow-card);
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.product-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 24px;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .product-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detail-img-box {
+  width: 100%;
+  height: 260px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-inset);
+}
+
+.detail-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  background: var(--bg-color);
+  box-shadow: var(--shadow-drop);
+}
+
+.detail-price {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--accent-color);
+}
+
+.detail-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.detail-section label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text-main);
+}
+
+.quality-list {
+  list-style: none;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.quality-list li::before {
+  content: "✔ ";
+  color: var(--accent-color);
+}
+
+.variant-options {
+  display: flex;
+  gap: 8px;
+}
+
+.variant-btn {
+  border: none;
+  background: var(--bg-color);
+  box-shadow: var(--shadow-drop);
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.variant-btn.active {
+  box-shadow: var(--shadow-inset);
+  color: var(--accent-color);
+}
+
+.color-options {
+  display: flex;
+  gap: 10px;
+}
+
+.color-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: var(--shadow-drop);
+  border: 2px solid transparent;
+}
+
+.color-dot.active {
+  border-color: var(--accent-color);
+}
+
+.modal-action-row {
+  margin-top: 10px;
+}
+
+.add-btn-large {
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  border: none;
+  background: var(--accent-gradient);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-drop);
+}
