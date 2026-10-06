@@ -443,3 +443,22 @@ body {
   pointer-events: auto;
   padding: 0 18px;
 }
+
+/* Product Modal টি লুকানো এবং পপ-আপ হিসেবে সেট করা */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(8px);
+  display: none; /* ডিফল্টভাবে লুকিয়ে থাকবে */
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-overlay.active {
+  display: flex; /* সক্রিয় হলে পপ-আপ দেখাবে */
+}
